@@ -43,7 +43,6 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
 
     return plaintext
 
-git commit -m "Реализована функция encrypt_caesar()"
 
 print(encrypt_caesar("ADOlfIKuSmaXiMus3.6"))
 print(decrypt_caesar("DGRoiLNxVpdAlPxv3.6"))
