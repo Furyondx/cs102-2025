@@ -43,5 +43,6 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
 
     return plaintext
 
+
 print(encrypt_vigenere("NIGANIGANIGAIWEBHWWBWEBWEB", "CRING"))
 print(decrypt_vigenere("PZONTKXIAOIRQJKDYEJHYVJJKD", "CRING"))
