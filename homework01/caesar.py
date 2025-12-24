@@ -45,4 +45,5 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
 
 
 print(encrypt_caesar("ADOlfIKuSmaXiMus3.6"))
+
 print(decrypt_caesar("DGRoiLNxVpdAlPxv3.6"))
