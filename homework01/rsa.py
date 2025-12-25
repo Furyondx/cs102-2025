@@ -47,17 +47,19 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    or_phi = phi
-    y = 0
-    x1 = 1
-    while e > 0:
-        temp1 = phi // e
-        temp2 = phi - temp1 * e
-        phi = e
-        e = temp2
-        y = x1 - temp1 * y
-        x1 = y
-    return x1 % or_phi
+    def extended_gcd(a, b):
+        if a == 0:
+            return b, 0, 1
+        gcd, x1, y1 = extended_gcd(b % a, a)
+        x = y1 - (b // a) * x1
+        y = x1
+        return gcd, x, y
+
+    gcd, x, y = extended_gcd(e, phi)
+    if gcd != 1:
+        raise ValueError("No multiplicative inverse exists")
+
+    return x % phi
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
