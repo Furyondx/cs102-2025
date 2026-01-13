@@ -1,7 +1,11 @@
 import tkinter as tk
+from tkinter import ttk
 from typing import List
-from tkinter import ttk, messagebox
-from maze import bin_tree_maze, solve_maze, add_path_to_grid
+
+from maze import add_path_to_grid, bin_tree_maze, solve_maze
+
+csize = 10
+N, M = 51, 77
 
 
 def draw_cell(x, y, color, size: int = 10):
@@ -16,39 +20,36 @@ def draw_maze(grid: List[List[str]], size: int = 10):
     for x, row in enumerate(grid):
         for y, cell in enumerate(row):
             if cell == " ":
-                color = 'White'
+                color = "White"
             elif cell == "■":
-                color = 'black'
-            elif cell == "X":
-                color = "red"
+                color = "black"
+            else:
+                color = "green"
             draw_cell(y, x, color, size)
 
 
-def show_solution():
-    maze, path = solve_maze(GRID)
-    maze = add_path_to_grid(GRID, path)
-    if path:
-        draw_maze(maze, CELL_SIZE)
-    else:
-        tk.messagebox.showinfo("Message", "No solutions")
+def show_solution(displayed_maze, displayed_path):
+    displayed_maze = add_path_to_grid(GRID, displayed_path)
+    draw_maze(displayed_maze, csize)
 
 
 if __name__ == "__main__":
-    global GRID, CELL_SIZE
-    N, M = 51, 77
-
-    CELL_SIZE = 10
-    GRID = bin_tree_maze(N, M)
+    has_solution = False
+    while not has_solution:
+        GRID = bin_tree_maze(N, M)
+        maze, path = solve_maze(GRID)
+        has_solution = bool(path)
 
     window = tk.Tk()
-    window.title('Maze')
-    window.geometry("%dx%d" % (M * CELL_SIZE + 100, N * CELL_SIZE + 100))
+    window.title("Maze")
+    window.geometry("%dx%d" % (M * csize + 100, N * csize + 100))
 
-    canvas = tk.Canvas(window, width=M * CELL_SIZE, height=N * CELL_SIZE)
+    canvas = tk.Canvas(window, width=M * csize, height=N * csize)
     canvas.pack()
 
-    draw_maze(GRID, CELL_SIZE)
-    ttk.Button(window, text="Solve", command=show_solution).pack(pady=20)
+    draw_maze(GRID, csize)
+    ttk.Button(window, text="Solve", command=lambda: show_solution(maze, path)).pack(
+        pady=20
+    )
 
     window.mainloop()
-
