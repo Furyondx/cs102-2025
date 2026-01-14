@@ -48,8 +48,6 @@ if __name__ == "__main__":
     canvas.pack()
 
     draw_maze(GRID, csize)
-    ttk.Button(window, text="Solve", command=lambda: show_solution(maze, path)).pack(
-        pady=20
-    )
+    ttk.Button(window, text="Solve", command=lambda: show_solution(maze, path)).pack(pady=20)
 
     window.mainloop()
