@@ -48,7 +48,6 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     23
     """
 
-
     def extended_gcd(a, b):
         if a == 0:
             return b, 0, 1
